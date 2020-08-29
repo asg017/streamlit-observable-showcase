@@ -38,13 +38,17 @@ section = st.sidebar.radio(
     index=section_i
 )
 
+st.sidebar.markdown("""
+Made by [Alex Garcia](https://twitter.com/agarcia_me) 🦒
+""")
+
 if section == Section.INTRO.value:
     st.experimental_set_query_params(section=Section.INTRO.value)
 
     st.write("""
-# Introduction to `streamlit-observable`
+# Introducing [`streamlit-observable`](https://github.com/asg017/streamlit-observable)!
 
-👋🏼 Hello! This Streamlit app is an introduction to the `streamlit-observable` 
+👋🏼 Hello! This Streamlit app is an introduction to the [`streamlit-observable`](https://github.com/asg017/streamlit-observable) 
 library - a Streamlit custom component for embeding [Observable notebooks](https://observablehq.com)
 into Streamlit apps. You can render, re-use, and recycle any Observable notebook
 found on [observablehq.com](https://observablehq.com), 
@@ -63,6 +67,9 @@ maps, charts, and animations that you can embed into any Streamlit app!
 
     st.write("""
 Or, you can scroll down to get a quick taste of what `streamlit-observable` can do!
+
+[Here is the source code for this Streamlit app!](https://github.com/asg017/streamlit-observable-showcase)
+
         """)
     
     with st.echo():
@@ -135,8 +142,9 @@ So we have our 3 Streamlit sliders, and we know what Observable notebook we want
 And that's it! Try changing the `a`, `b`, or `c` sliders above, and watch how the new values automatically 
 get propogated down into the notebook.
 
-Let's quickly explain the parameters to the `observable()` function. You can find the full API Reference for 
-`streamlit-observable` [here](TODO).
+Let's quickly explain the parameters to the `observable()` function. Here is the 
+[full API Reference](https://github.com/asg017/streamlit-observable#api-reference) 
+for `streamlit-observable`.
 
 The first parameter, `"Example Updatable Bar Chart"`, is the `key` parameter, used to uniquely identify every `streamlit-observable` embed. 
 
