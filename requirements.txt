@@ -1,2 +1,2 @@
-streamlit==0.65.2
-streamlit-observable==0.0.7
+streamlit-0.68.0-py2.py3-none-any.whl
+streamlit_observable-0.0.8-py3-none-any.whl
