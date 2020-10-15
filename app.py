@@ -645,28 +645,29 @@ the `"countyCodes"` cell with `Array.from()` to convert to a JSON-serializable a
 
         selectedCounties = observers.get("selectedCounties")
     
-    st.write(selectedCounties)
-    
-    if explain:
-        st.write("""
-So we have `selectedCounties`, a list of counties that are selected in the map above, and 
-`df`, a dataframe of all counties in the United States with the size of the population. 
-Now, we can do a little pandas magic 🔮 to find out how many people live inside and 
-outside the selected counties:
-""")
+    if bool(selectedCounties):
+        st.write(selectedCounties)
+        
+        if explain:
+            st.write("""
+    So we have `selectedCounties`, a list of counties that are selected in the map above, and 
+    `df`, a dataframe of all counties in the United States with the size of the population. 
+    Now, we can do a little pandas magic 🔮 to find out how many people live inside and 
+    outside the selected counties:
+    """)
 
-    with st.echo():
-        df_selected = df[df["county_fips"].isin(selectedCounties)]
-        df_not_selected = df[~df["county_fips"].isin(selectedCounties)]
+        with st.echo():
+            df_selected = df[df["county_fips"].isin(selectedCounties)]
+            df_not_selected = df[~df["county_fips"].isin(selectedCounties)]
 
-        sel_sum = df_selected.population.sum()
-        not_sel_sum = df_not_selected.population.sum()
+            sel_sum = df_selected.population.sum()
+            not_sel_sum = df_not_selected.population.sum()
 
-        st.write("""
-**{:,}** people live in the **{:,}** counties that are selected above. 
-That's **{:.2%}** of the total US population.""".format(
-            sel_sum, len(df_selected), sel_sum / not_sel_sum
-        ))
+            st.write("""
+    **{:,}** people live in the **{:,}** counties that are selected above. 
+    That's **{:.2%}** of the total US population.""".format(
+                sel_sum, len(df_selected), sel_sum / not_sel_sum
+            ))
 
 elif section == Section.MATRIX.value:
     st.experimental_set_query_params(section=Section.MATRIX.value)
@@ -728,32 +729,32 @@ But it looked better when they were separated into their own components.
 
 Now, let's read in the values of the `a` and `b` cells:
         """)
+    if bool(observers_a) and bool(observers_b):
+        with st.echo():
+            a = observers_a.get("a")
+            b = observers_b.get("b")
 
-    with st.echo():
-        a = observers_a.get("a")
-        b = observers_b.get("b")
+        if explain:
+            st.write("Then let's multiply these two matricies together:")
 
-    if explain:
-        st.write("Then let's multiply these two matricies together:")
+        with st.echo():
+            result = np.matmul(a, b)
 
-    with st.echo():
-        result = np.matmul(a, b)
+        if explain:
+            st.write("""Finally, let's use that `"prettyExample"` cell
+                to render the multiplication result out!""")
 
-    if explain:
-        st.write("""Finally, let's use that `"prettyExample"` cell
-to render the multiplication result out!""")
+        with st.echo():
+            observable("np.matmul result", 
+                notebook="d/9e0aa2504039dbcd",
+                targets=["prettyExample"],
+                redefine={
+                    "example": result.tolist()
+                }
+            )
 
-    with st.echo():
-        observable("np.matmul result", 
-            notebook="d/9e0aa2504039dbcd",
-            targets=["prettyExample"],
-            redefine={
-                "example": result.tolist()
-            }
-        )
-
-    if explain:
-        st.write("""
-Nice! Try clicking on the `a` and `b` matrices above, and see how the 
-multiplication results changes.
-""")
+        if explain:
+            st.write("""
+                Nice! Try clicking on the `a` and `b` matrices above, and see how the 
+                multiplication results changes.
+                """)
