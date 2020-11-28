@@ -1,4 +1,4 @@
-# streamlit-observable Showcase
+# streamlit-observable Showcase [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/asg017/streamlit-observable-showcase/app.py)
 
 An example Streamlit app using [`streamlit-observable`](https://github.com/asg017/streamlit-observable)!
 
